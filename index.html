@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="" ng-app="hashtag-finder">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Title Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+<body ng-controller="HashtagController as hashtag" style="background: url(Hashtag-reduced.jpg)center center fixed">
+    <div class="container" style="margin-top: 25px">
+        <div class="well clearfix">
+            <img src="angry-twitter-bird.png" / class="img-rounded img-responsive pull-right">
+            <h1>Wat the #...</h1>
+            <p class="lead">What does your # mean?</p>
+            <small>Search the most common hashtags you want to know the meaning of.</small>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="input-group" style="margin-top: 50px;">
+                        <input type="text" class="form-control" ng-model="hashtag.input" placeholder="Search for...">
+                        <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" ng-click="hashtag.findHashtag(hashtag.input)">Go!</button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-xs-8">
+                    <div class="list-group" ng-show="hashtag.results">
+                        <a ng-href="https://twitter.com/hashtag/{{hashtag.results[0].def.hashtag}}?src=tren" target="_blank" class="list-group-item active">#{{hashtag.results[0].def.hashtag}}</a>
+                        <a class="list-group-item">{{hashtag.results[0].def.text}}</a>
+                        <a class="list-group-item">{{hashtag.results[1].def.text}}</a>
+                        <a class="list-group-item">{{hashtag.results[2].def.text}}</a>
+                        <a class="list-group-item">{{hashtag.results[3].def.text}}</a>
+                        <a class="list-group-item">{{hashtag.results[4].def.text}}</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="well" ng-show="hashtag.results">
+                    <div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <img ng-src={{hashtag.giphys[0].images.fixed_height.url}} class="img-responsive pull-left">
+                            </div>
+                            <div class="col-sm-4">
+                                <img ng-src={{hashtag.giphys[1].images.fixed_height.url}} class="img-responsive center-block">
+                            </div>
+                            <div class="col-sm-4">
+                                <img ng-src={{hashtag.giphys[2].images.fixed_height.url}} class="img-responsive pull-right">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h1>#{{hashtag.results[0].def.hashtag}}</h1>
+                        <p><a class="btn btn-primary btn-md" href="#" role="button" ng-click="hashtag.findGiphy(hashtag.input)">Generate GIF</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="app/app.module.js"></script>
+    <script src="app/core/hashtag.factory.js"></script>
+    <script src="app/core/giphy.factory.js"></script>
+    <script src="app/search/hashtag.controller.js"></script>
+</body>
+</html>
